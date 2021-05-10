@@ -1,3 +1,14 @@
+package librarymanagement;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import checkbox.newwin;
+
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -9,6 +20,8 @@ import javax.swing.SwingConstants;
 import javax.swing.JPanel;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class homepage {
 
@@ -47,23 +60,23 @@ public class homepage {
 		frmWelcome.setBounds(100, 100, 854, 456);
 		frmWelcome.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmWelcome.getContentPane().setLayout(null);
-		
+
 		JLabel lblNewLabel = new JLabel("Welcome to Library Management System");
 		lblNewLabel.setBackground(new Color(240, 240, 240));
-		lblNewLabel.setBounds(99, 31, 674, 35);
+		lblNewLabel.setBounds(10, 31, 763, 35);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setForeground(new Color(240, 230, 140));
 		lblNewLabel.setFont(new Font("Rockwell", Font.BOLD, 33));
 		frmWelcome.getContentPane().add(lblNewLabel);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setBounds(104, 136, 169, 167);
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setIcon(new ImageIcon("C:\\ARWA\\TYBCA\\SEM-VI\\Project\\adminlogin.jpg"));
-		
+
 
 		frmWelcome.getContentPane().add(lblNewLabel_1);
-		
+
 		JLabel lblNewLabel_2 = new JLabel("");
 		lblNewLabel_2.setBounds(556, 136, 169, 167);
 		lblNewLabel_2.setLabelFor(frmWelcome);
@@ -71,19 +84,38 @@ public class homepage {
 		lblNewLabel_2.setBackground(new Color(240, 240, 240));
 		lblNewLabel_2.setIcon(new ImageIcon("C:\\ARWA\\TYBCA\\SEM-VI\\Project\\librarianlogin.jpg"));
 		frmWelcome.getContentPane().add(lblNewLabel_2);
-		
+
 		JLabel lblNewLabel_3 = new JLabel("Admin Login");
+		lblNewLabel_3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				login obj= new login();
+				obj.setVisible(true);
+				frmWelcome.setVisible(false);
+			}
+			
+		});
 		lblNewLabel_3.setBounds(99, 324, 188, 28);
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_3.setFont(new Font("Georgia", Font.BOLD, 26));
 		frmWelcome.getContentPane().add(lblNewLabel_3);
-		
+
 		JLabel lblNewLabel_4 = new JLabel("Librarian Login");
+		lblNewLabel_4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				librarianlogin obj= new librarianlogin();
+				obj.setVisible(true);
+				frmWelcome.setVisible(false);
+				
+				
+			}
+		});
 		lblNewLabel_4.setBounds(531, 324, 242, 28);
 		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_4.setFont(new Font("Georgia", Font.BOLD, 26));
 		frmWelcome.getContentPane().add(lblNewLabel_4);
-		
+
 		JLabel lblNewLabel_5 = new JLabel("");
 		lblNewLabel_5.setIcon(new ImageIcon("C:\\ARWA\\TYBCA\\SEM-VI\\Project\\log.png"));
 		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
