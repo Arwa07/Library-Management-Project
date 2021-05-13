@@ -1,15 +1,12 @@
+package librarymanagement;
 
-
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -18,20 +15,18 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-import javax.swing.ImageIcon;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-
-import javax.swing.border.TitledBorder;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.CompoundBorder;
 import javax.swing.SwingConstants;
 import java.sql.* ;
 import java.awt.SystemColor;
 public class librarianlogin extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	ResultSet rs=null;
 	
 	private JPanel contentPane;
@@ -101,6 +96,7 @@ public class librarianlogin extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String uname=txtuname.getText();
+				@SuppressWarnings("deprecation")
 				String pswd=txtpwd.getText();
 				
 				if(uname.equals("")||pswd.equals(""))
@@ -118,7 +114,9 @@ public class librarianlogin extends JFrame {
 						rs=stmt.executeQuery();
 						if(rs.next())
 						{
+							@SuppressWarnings("unused")
 							String s1=rs.getString("user_id");
+							@SuppressWarnings("unused")
 							String s2=rs.getString("password");
 							JOptionPane.showMessageDialog(btnNewButton, "Logged in Successfully");
 							txtuname.setText("");

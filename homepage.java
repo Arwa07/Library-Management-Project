@@ -1,25 +1,17 @@
 package librarymanagement;
 
-import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
-import checkbox.newwin;
-
-import java.awt.EventQueue;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.ImageIcon;
-import java.awt.Panel;
+
 import javax.swing.SwingConstants;
-import javax.swing.JPanel;
-import java.awt.SystemColor;
-import java.awt.Toolkit;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
