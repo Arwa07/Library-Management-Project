@@ -24,11 +24,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class addlibrarian {
 
@@ -81,6 +84,8 @@ private JTextField textField;
 	 */
 	public addlibrarian() {
 		initialize();
+		
+		
 	}
 
 	/**
@@ -168,31 +173,19 @@ private JTextField textField;
 				if(firstname.equals("")||lastname.equals("")||email.equals("")||phoneno.equals("")||password.equals(""))
 				{
 					JOptionPane.showMessageDialog(btnNewButton, "SOME FIELDS ARE EMPTY","error",1);
-					textField.setText("");
-					textField_1.setText("");
-					textField_2.setText("");
-					textField_3.setText("");
-					passwordField_3.setText("");
-					passwordField_2.setText("");
+					
 				}
 				else if(!pswd.equals(password)) {
 					JOptionPane.showMessageDialog(btnNewButton, "password does not macthed","error",1);
-					textField.setText("");
-					textField_1.setText("");
-					textField_2.setText("");
-					textField_3.setText("");
 					passwordField_3.setText("");
 					passwordField_2.setText("");
 				}
 				else if(!Pattern.matches("^[0-9]+$", textField_3.getText()))
 				{
 			       JOptionPane.showMessageDialog(btnNewButton, "PHONENO SHOULD BE A NUMBER");
-			       textField.setText("");
-					textField_1.setText("");
-					textField_2.setText("");
+					
 					textField_3.setText("");
-					passwordField_3.setText("");
-					passwordField_2.setText("");
+					
 				}
 				
 
@@ -227,6 +220,19 @@ private JTextField textField;
 					
 						JOptionPane.showMessageDialog(btnNewButton,"Error");
 				}
+				try {
+					 Class.forName("com.mysql.cj.jdbc.Driver");
+					 Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/slibrary","root","root");
+					 Statement stmt=con.createStatement();
+					 ResultSet rs=stmt.executeQuery("select * from librarian");
+					 table.setModel(DbUtils.resultSetToTableModel(rs));
+					 
+					 						 con.close();
+					
+				 }
+				 catch(Exception e3){
+					 System.out.print(e3);
+			 }
 				}
 
 			}
@@ -247,11 +253,142 @@ private JTextField textField;
 		frame.getContentPane().add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Delete");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(table.getSelectedRowCount()==1) {
+				try {
+					Class.forName("com.mysql.cj.jdbc.Driver");
+					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/slibrary","root","root");
+					int row=table.getSelectedRow();
+					String value=table.getModel().getValueAt(row,0).toString();
+					String query="delete from librarian where user_id ="+value;
+					 PreparedStatement stmt=con.prepareStatement(query);
+					 stmt.executeUpdate();
+					 DefaultTableModel tbmodel=(DefaultTableModel)table.getModel();
+					 tbmodel.setRowCount(0);
+					 
+					 JOptionPane.showMessageDialog(btnNewButton_1, "Record deleted");
+					 
+						
+					 
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				try {
+					 Class.forName("com.mysql.cj.jdbc.Driver");
+					 Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/slibrary","root","root");
+					 Statement stmt=con.createStatement();
+					 ResultSet rs=stmt.executeQuery("select * from librarian");
+					 table.setModel(DbUtils.resultSetToTableModel(rs));
+					 
+					 						 con.close();
+					
+				 }
+				 catch(Exception e3){
+					 System.out.print(e3);
+			 }
+				}
+				else {
+					 JOptionPane.showMessageDialog(btnNewButton_1, "Please select row to delete");
+
+				}
+
+
+			}
+		});
 		btnNewButton_1.setFont(new Font("Constantia", Font.BOLD, 18));
 		btnNewButton_1.setBounds(10, 486, 103, 33);
 		frame.getContentPane().add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Update");
+		btnNewButton_2.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					DefaultTableModel d1=(DefaultTableModel)table.getModel();
+					int selectedIndex=table.getSelectedRow();
+					int user_id=Integer.parseInt(d1.getValueAt(selectedIndex,0).toString());
+
+				String firstname=textField.getText();
+				String lastname=textField_1.getText();
+				String email=textField_2.getText();
+				String phoneno=textField_3.getText();
+				String pswd=passwordField_2.getText();
+				
+				String password=passwordField_3.getText();
+				if(firstname.equals("")||lastname.equals("")||email.equals("")||phoneno.equals("")||password.equals(""))
+				{
+					JOptionPane.showMessageDialog(btnNewButton, "SOME FIELDS ARE EMPTY","error",1);
+					
+				}
+				else if(!pswd.equals(password)) {
+					JOptionPane.showMessageDialog(btnNewButton, "password does not macthed","error",1);
+					;
+					passwordField_3.setText("");
+					passwordField_2.setText("");
+				}
+				else if(!Pattern.matches("^[0-9]+$", textField_3.getText()))
+				{
+			       JOptionPane.showMessageDialog(btnNewButton, "PHONENO SHOULD BE A NUMBER");
+			    
+				  textField_3.setText("");
+					
+				}
+				
+
+				else {
+				try {
+					Class.forName("com.mysql.cj.jdbc.Driver");
+					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/slibrary","root","root");
+					PreparedStatement stmt=con.prepareStatement(" update librarian set firstname = ? ,lastname = ? ,email = ?,phoneno =? ,password =? where user_id= ?");
+					stmt.setString(1, firstname);
+					stmt.setString(2, lastname);
+					stmt.setString(3, email);
+					stmt.setString(4, phoneno);
+					stmt.setString(5, password);
+					stmt.setInt(6, user_id);
+
+					int i=stmt.executeUpdate();
+					if(i !=0)
+					{
+						JOptionPane.showMessageDialog(btnNewButton, "Record Updated");
+						textField.setText("");
+						textField_1.setText("");
+						textField_2.setText("");
+						textField_3.setText("");
+						passwordField_3.setText("");
+						passwordField_2.setText("");
+						btnNewButton.setEnabled(true);
+
+
+					}
+
+
+					
+					
+					}catch(Exception e1){
+					
+						JOptionPane.showMessageDialog(btnNewButton,"Error");
+				}
+				try {
+					 Class.forName("com.mysql.cj.jdbc.Driver");
+					 Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/slibrary","root","root");
+					 Statement stmt=con.createStatement();
+					 ResultSet rs=stmt.executeQuery("select * from librarian");
+					 table.setModel(DbUtils.resultSetToTableModel(rs));
+					 
+					 						 con.close();
+					
+				 }
+				 catch(Exception e3){
+					 System.out.print(e3);
+			 }
+				}
+
+			}
+		});
 		btnNewButton_2.setFont(new Font("Constantia", Font.BOLD, 18));
 		btnNewButton_2.setBounds(151, 426, 103, 33);
 		frame.getContentPane().add(btnNewButton_2);
@@ -266,6 +403,24 @@ private JTextField textField;
 		frame.getContentPane().add(scrollPane);
 		
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				DefaultTableModel d1=(DefaultTableModel)table.getModel();
+				int selectedIndex=table.getSelectedRow();
+				int user_id=Integer.parseInt(d1.getValueAt(selectedIndex,0).toString());
+				textField.setText(d1.getValueAt(selectedIndex,1).toString());
+				textField_1.setText(d1.getValueAt(selectedIndex,2).toString());
+				textField_2.setText(d1.getValueAt(selectedIndex,3).toString());
+				textField_3.setText(d1.getValueAt(selectedIndex,4).toString());
+
+				passwordField_2.setText(d1.getValueAt(selectedIndex,5).toString());
+				
+								btnNewButton.setEnabled(false);
+				
+
+			}
+		});
 		table.setBorder(new EmptyBorder(0, 0, 0, 0));
 		JTableHeader tableHeader = table.getTableHeader();
 		 Font headerFont = new Font("Calibri", Font.BOLD, 15);

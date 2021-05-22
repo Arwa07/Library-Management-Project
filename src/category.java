@@ -37,6 +37,9 @@ public class category {
 	private final JLabel lblNewLabel = new JLabel("Category");
 	private JTextField textField;
 	static private JTable table;
+	private  JComboBox comboBox;
+	//private JButton btnNewButton;
+
 
 	/**
 	 * Launch the application.
@@ -120,16 +123,74 @@ public class category {
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2.setBounds(10, 194, 104, 24);
 		frame.getContentPane().add(lblNewLabel_2);
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"active", "deactive"}));
+		comboBox.setBounds(165, 197, 131, 22);
+		frame.getContentPane().add(comboBox);
+		textField = new JTextField();
+		textField.setBounds(165, 125, 131, 24);
+		frame.getContentPane().add(textField);
+		textField.setColumns(10);
+		JButton btnNewButton = new JButton("Add");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//to insert record---
+				String category=textField.getText();
+				String status=comboBox.getSelectedItem().toString();
+				if(category.equals("")||status.compareToIgnoreCase("")==1){
+					JOptionPane.showMessageDialog(btnNewButton, "SOME FIELDS ARE EMPTY","error",1);
+					textField.setText("");
+					comboBox.setSelectedIndex(-1);
+					
+				}
+				else {
+				try {
+					pst=con.prepareStatement("insert into category(catname,status) values(?,?)");
+					pst.setString(1, category);
+					pst.setString(2, status);
+					int k=pst.executeUpdate();
+					
+					if(k==1)
+					{
+						JOptionPane.showMessageDialog(btnNewButton, "Record Added");
+						textField.setText("");
+						comboBox.setSelectedIndex(-1);
+						textField.requestFocus();
+						load();
+						
+					}
+					else {
+						JOptionPane.showMessageDialog(btnNewButton, "Error..");
 
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(335, 31, 663, 572);
-		frame.getContentPane().add(scrollPane);
+					}
+					
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				}
+				
+			}
+		});
+		btnNewButton.setFont(new Font("Constantia", Font.BOLD, 18));
+		btnNewButton.setBounds(21, 295, 112, 36);
+		frame.getContentPane().add(btnNewButton);
+
 		
+
+
+				
 		table = new JTable();
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				//to show selected row content------
+				DefaultTableModel d1=(DefaultTableModel)table.getModel();
+				int selectedIndex=table.getSelectedRow();
+				int id=Integer.parseInt(d1.getValueAt(selectedIndex,0).toString());
+				textField.setText(d1.getValueAt(selectedIndex,1).toString());
+				comboBox.setSelectedItem(d1.getValueAt(selectedIndex,1).toString());
+				btnNewButton.setEnabled(false);
 				
 				
 			}
@@ -188,37 +249,80 @@ public class category {
 			new String[] {
 				"ID", "Category Name", "Status"
 			}
-		) {
+		) /*{
 			Class[] columnTypes = new Class[] {
 				Integer.class, Object.class, Object.class
-			};
+			}
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
-			}
-		});
+			}*/
+		);
 		table.getColumnModel().getColumn(0).setPreferredWidth(94);
 		table.getColumnModel().getColumn(1).setPreferredWidth(255);
 		table.getColumnModel().getColumn(2).setPreferredWidth(172);
 		table.setBounds(335, 52, 663, 549);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(335, 31, 663, 572);
+		frame.getContentPane().add(scrollPane);
+
 		scrollPane.setViewportView(table);
 
 		
 		@SuppressWarnings("rawtypes")
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"active", "deactive"}));
-		comboBox.setBounds(165, 197, 131, 22);
-		frame.getContentPane().add(comboBox);
 		
-		textField = new JTextField();
-		textField.setBounds(165, 125, 131, 24);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
 		
-		JButton btnNewButton = new JButton("Add");
-		btnNewButton.addActionListener(new ActionListener() {
+				
+				
+		JButton btnNewButton_1 = new JButton("Delete");
+		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//to delete selected row record----
+				if(table.getSelectedRowCount()==1) {
+				try {
+					Class.forName("com.mysql.cj.jdbc.Driver");
+					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/slibrary","root","root");
+					int row=table.getSelectedRow();
+					String value=table.getModel().getValueAt(row,0).toString();
+					String query="delete from category where id="+value;
+					 PreparedStatement stmt=con.prepareStatement(query);
+					 stmt.executeUpdate();
+					 DefaultTableModel tbmodel=(DefaultTableModel)table.getModel();
+					 tbmodel.setRowCount(0);
+					 load();
+					 JOptionPane.showMessageDialog(btnNewButton_1, "Record deleted");
+					 
+						
+					 
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				}
+				else {
+					 JOptionPane.showMessageDialog(btnNewButton_1, "Please select row to delete");
+
+				}
+				
+			}
+		});
+		btnNewButton_1.setFont(new Font("Constantia", Font.BOLD, 18));
+		btnNewButton_1.setBounds(21, 376, 112, 36);
+		frame.getContentPane().add(btnNewButton_1);
+		
+		JButton btnNewButton_2 = new JButton("Update");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//to update selected row record---
+				DefaultTableModel d1=(DefaultTableModel)table.getModel();
+				int selectedIndex=table.getSelectedRow();
+				int id=Integer.parseInt(d1.getValueAt(selectedIndex,0).toString());
+
 				String category=textField.getText();
 				String status=comboBox.getSelectedItem().toString();
+				
 				if(category.equals("")||status.compareToIgnoreCase("")==1){
 					JOptionPane.showMessageDialog(btnNewButton, "SOME FIELDS ARE EMPTY","error",1);
 					textField.setText("");
@@ -227,18 +331,20 @@ public class category {
 				}
 				else {
 				try {
-					pst=con.prepareStatement("insert into category(catname,status) values(?,?)");
+					pst=con.prepareStatement("update category set catname = ?,status = ? where id= ?");
 					pst.setString(1, category);
 					pst.setString(2, status);
+					pst.setInt(3, id);
 					int k=pst.executeUpdate();
 					
 					if(k==1)
 					{
-						JOptionPane.showMessageDialog(btnNewButton, "Record Added");
+						JOptionPane.showMessageDialog(btnNewButton, "Record Updated");
 						textField.setText("");
 						comboBox.setSelectedIndex(-1);
 						textField.requestFocus();
 						load();
+						btnNewButton.setEnabled(true);
 						
 					}
 					else {
@@ -250,25 +356,9 @@ public class category {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				}
-				
+
 			}
-		});
-		btnNewButton.setFont(new Font("Constantia", Font.BOLD, 18));
-		btnNewButton.setBounds(21, 295, 112, 36);
-		frame.getContentPane().add(btnNewButton);
-		
-		JButton btnNewButton_1 = new JButton("Delete");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//DefaultTableMOdel d1= (DefaultTableMOdel)JTable.getModel();
-			}
-		});
-		btnNewButton_1.setFont(new Font("Constantia", Font.BOLD, 18));
-		btnNewButton_1.setBounds(21, 376, 112, 36);
-		frame.getContentPane().add(btnNewButton_1);
-		
-		JButton btnNewButton_2 = new JButton("Update");
+			}});
 		btnNewButton_2.setFont(new Font("Constantia", Font.BOLD, 18));
 		btnNewButton_2.setBounds(166, 295, 112, 36);
 		frame.getContentPane().add(btnNewButton_2);
