@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class librarianfunc {
 
@@ -53,27 +55,78 @@ public class librarianfunc {
 		frame.getContentPane().add(lblNewLabel_10);
 		
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon("C:\\ARWA\\TYBCA\\SEM-VI\\Project\\addbooks.png"));
+		lblNewLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				addbooks object= new addbooks();
+				object.main(null);
+				
+				frame.setVisible(false);
+
+			}
+		});
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Sarim\\eclipse-workspace\\Library-Management-Project\\images\\addbooks.png"));
 		lblNewLabel.setBounds(283, 60, 121, 115);
 		frame.getContentPane().add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("\r\n");
-		lblNewLabel_1.setIcon(new ImageIcon("C:\\ARWA\\TYBCA\\SEM-VI\\Project\\student.jpg"));
+		lblNewLabel_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				student object= new student();
+				object.main(null);
+				
+				frame.setVisible(false);
+
+			}
+		});
+		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Sarim\\eclipse-workspace\\Library-Management-Project\\images\\student.jpg"));
 		lblNewLabel_1.setBounds(195, 314, 121, 115);
 		frame.getContentPane().add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("New label");
-		lblNewLabel_2.setIcon(new ImageIcon("C:\\ARWA\\TYBCA\\SEM-VI\\Project\\issuebooks.png"));
+		lblNewLabel_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				issuebook object= new issuebook();
+				object.main(null);
+				
+				frame.setVisible(false);
+
+			}
+		});
+		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\Sarim\\eclipse-workspace\\Library-Management-Project\\images\\issuebooks.png"));
 		lblNewLabel_2.setBounds(20, 133, 121, 115);
 		frame.getContentPane().add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("");
-		lblNewLabel_3.setIcon(new ImageIcon("C:\\ARWA\\TYBCA\\SEM-VI\\Project\\logout.png"));
+		lblNewLabel_3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				homepage object= new homepage();
+				object.main(null);
+				
+				frame.setVisible(false);
+
+			}
+		});
+		lblNewLabel_3.setIcon(new ImageIcon("C:\\Users\\Sarim\\eclipse-workspace\\Library-Management-Project\\images\\logout.png"));
 		lblNewLabel_3.setBounds(405, 314, 121, 115);
 		frame.getContentPane().add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("New label");
-		lblNewLabel_4.setIcon(new ImageIcon("C:\\ARWA\\TYBCA\\SEM-VI\\Project\\returnbooks.png"));
+		lblNewLabel_4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				returnbook object= new returnbook();
+				object.main(null);
+				
+				frame.setVisible(false);
+
+			}
+		});
+		lblNewLabel_4.setIcon(new ImageIcon("C:\\Users\\Sarim\\eclipse-workspace\\Library-Management-Project\\images\\returnbooks.png"));
 		lblNewLabel_4.setBounds(535, 133, 121, 115);
 		frame.getContentPane().add(lblNewLabel_4);
 		

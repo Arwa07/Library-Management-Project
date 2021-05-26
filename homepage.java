@@ -1,4 +1,4 @@
-package librarymanagement;
+
 
 
 import java.awt.EventQueue;
@@ -62,9 +62,10 @@ public class homepage {
 		frmWelcome.getContentPane().add(lblNewLabel);
 
 		JLabel lblNewLabel_1 = new JLabel("");
+		
 		lblNewLabel_1.setBounds(104, 136, 169, 167);
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setIcon(new ImageIcon("C:\\ARWA\\TYBCA\\SEM-VI\\Project\\adminlogin.jpg"));
+		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Sarim\\eclipse-workspace\\Library-Management-Project\\images\\adminlogin.jpg"));
 
 
 		frmWelcome.getContentPane().add(lblNewLabel_1);
@@ -74,15 +75,15 @@ public class homepage {
 		lblNewLabel_2.setLabelFor(frmWelcome);
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2.setBackground(new Color(240, 240, 240));
-		lblNewLabel_2.setIcon(new ImageIcon("C:\\ARWA\\TYBCA\\SEM-VI\\Project\\librarianlogin.jpg"));
+		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\Sarim\\eclipse-workspace\\Library-Management-Project\\images\\librarianlogin.jpg"));
 		frmWelcome.getContentPane().add(lblNewLabel_2);
 
 		JLabel lblNewLabel_3 = new JLabel("Admin Login");
 		lblNewLabel_3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				login obj= new login();
-				obj.setVisible(true);
+				login obj1= new login();
+				obj1.setVisible(true);
 				frmWelcome.setVisible(false);
 			}
 			
@@ -96,8 +97,8 @@ public class homepage {
 		lblNewLabel_4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				librarianlogin obj= new librarianlogin();
-				obj.setVisible(true);
+				librarianlogin obj2= new librarianlogin();
+				obj2.setVisible(true);
 				frmWelcome.setVisible(false);
 				
 				
@@ -109,7 +110,7 @@ public class homepage {
 		frmWelcome.getContentPane().add(lblNewLabel_4);
 
 		JLabel lblNewLabel_5 = new JLabel("");
-		lblNewLabel_5.setIcon(new ImageIcon("C:\\ARWA\\TYBCA\\SEM-VI\\Project\\log.png"));
+		lblNewLabel_5.setIcon(new ImageIcon("C:\\Users\\Sarim\\eclipse-workspace\\Library-Management-Project\\images\\log.png"));
 		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_5.setBounds(0, 0, 840, 419);
 		frmWelcome.getContentPane().add(lblNewLabel_5);

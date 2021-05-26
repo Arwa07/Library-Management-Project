@@ -1,4 +1,4 @@
-package librarymanagement;
+
 
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -34,12 +34,14 @@ public class librarianlogin extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	static librarianlogin frame = new librarianlogin();
+	public static void main(String ars[]) {
+		frame.setVisible(true);
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					librarianlogin frame = new librarianlogin();
-					frame.setVisible(true);
+					;
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -91,7 +93,7 @@ public class librarianlogin extends JFrame {
 		JButton btnNewButton = new JButton("LOGIN");
 		btnNewButton.setForeground(new Color(153, 0, 51));
 		btnNewButton.setBackground(new Color(250, 240, 230));
-		btnNewButton.setIcon(new ImageIcon("C:\\Users\\arwam\\OneDrive\\Documents\\GitHub\\Library-Management-Project\\images\\preferences-system-login-icon.png"));
+		btnNewButton.setIcon(new ImageIcon("C:\\Users\\Sarim\\eclipse-workspace\\Library-Management-Project\\images\\preferences-system-login-icon.png"));
 		btnNewButton.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -119,6 +121,11 @@ public class librarianlogin extends JFrame {
 							@SuppressWarnings("unused")
 							String s2=rs.getString("password");
 							JOptionPane.showMessageDialog(btnNewButton, "Logged in Successfully");
+							librarianfunc object= new librarianfunc();
+							object.main(null);
+							
+							frame.setVisible(false);
+
 							txtuname.setText("");
 							txtpwd.setText("");
 						}
@@ -170,7 +177,7 @@ public class librarianlogin extends JFrame {
 		JButton btnNewButton_1 = new JButton("CANCEL");
 		btnNewButton_1.setForeground(new Color(153, 0, 51));
 		btnNewButton_1.setBackground(new Color(250, 240, 230));
-		btnNewButton_1.setIcon(new ImageIcon("C:\\Users\\arwam\\OneDrive\\Documents\\GitHub\\Library-Management-Project\\images\\Close-2-icon.png"));
+		btnNewButton_1.setIcon(new ImageIcon("C:\\Users\\Sarim\\eclipse-workspace\\Library-Management-Project\\images\\Close-2-icon.png"));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
@@ -190,7 +197,7 @@ public class librarianlogin extends JFrame {
 		JLabel lblNewLabel_2 = new JLabel("");
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2.setForeground(new Color(102, 0, 0));
-		lblNewLabel_2.setIcon(new ImageIcon("C:\\ARWA\\TYBCA\\SEM-VI\\Project\\bg1.PNG"));
+		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\Sarim\\eclipse-workspace\\Library-Management-Project\\images\\bg1.PNG"));
 		lblNewLabel_2.setBackground(new Color(204, 102, 204));
 		lblNewLabel_2.setBounds(0, 0, 690, 434);
 		contentPane.add(lblNewLabel_2);

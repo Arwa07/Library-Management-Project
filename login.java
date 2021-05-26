@@ -4,6 +4,11 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -25,18 +30,22 @@ public class login extends JFrame {
 	/**
 	 * 
 	 */
+	ResultSet rs=null;
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
 	/**
 	 * Launch the application.
 	 */
+	static login frame = new login();
 	public static void main(String[] args) {
+		
+		frame.setVisible(true);
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					login frame = new login();
-					frame.setVisible(true);
+					
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -85,7 +94,7 @@ public class login extends JFrame {
 		JButton btnNewButton = new JButton("LOGIN");
 		btnNewButton.setForeground(new Color(51, 0, 102));
 		btnNewButton.setBackground(new Color(255, 250, 240));
-		btnNewButton.setIcon(new ImageIcon("C:\\Users\\arwam\\OneDrive\\Documents\\GitHub\\Library-Management-Project\\images\\preferences-system-login-icon.png"));
+		btnNewButton.setIcon(new ImageIcon("C:\\Users\\Sarim\\eclipse-workspace\\Library-Management-Project\\images\\preferences-system-login-icon.png"));
 		btnNewButton.setFont(new Font("Times New Roman", Font.BOLD, 15));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -97,23 +106,46 @@ public class login extends JFrame {
 				{
 					JOptionPane.showMessageDialog(btnNewButton, "Some fields are empty","error",1);
 				}
-				
-				
-				
-				
-				else if(uname.equalsIgnoreCase("admin")&&pswd.equals("admin") )
-				{
-					JOptionPane.showMessageDialog(btnNewButton,"LOGIN SUCESSFULLY");
-					txtuname.setText("");
-					txtpwd.setText("");
+				else {
+					try {
+						Class.forName("com.mysql.cj.jdbc.Driver");
+						Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/slibrary","root","root");
+						PreparedStatement stmt=con.prepareStatement("select * from admin where user_id=? and password=?");
+						stmt.setString(1, uname);
+						stmt.setString(2, pswd);
+						
+						
+						 rs=stmt.executeQuery();
+						if(rs.next())
+						{
+							
+							JOptionPane.showMessageDialog(btnNewButton, "Logged in Successfully");
+							addlibrarian object= new addlibrarian();
+							object.main(null);
+							
+							frame.setVisible(false);
+
+							txtuname.setText("");
+							txtpwd.setText("");
+						}
+						else
+						{
+							JOptionPane.showMessageDialog(btnNewButton, " User_id or Password are not matched");
+							txtuname.setText("");
+							txtpwd.setText("");
+
+						}	
+						
+						}catch(Exception e1){
+							
+					
+					}
 				}
 				
-				else 
-				{
-					JOptionPane.showMessageDialog(btnNewButton,"Please provide correct details");
-					txtuname.setText("");
-					txtpwd.setText("");
-				}
+				
+				
+				
+				
 				
 				
 				 
@@ -148,7 +180,7 @@ public class login extends JFrame {
 		JButton btnNewButton_1 = new JButton("CANCEL");
 		btnNewButton_1.setForeground(new Color(51, 0, 102));
 		btnNewButton_1.setBackground(new Color(255, 250, 240));
-		btnNewButton_1.setIcon(new ImageIcon("C:\\Users\\arwam\\OneDrive\\Documents\\GitHub\\Library-Management-Project\\images\\Close-2-icon.png"));
+		btnNewButton_1.setIcon(new ImageIcon("C:\\Users\\Sarim\\eclipse-workspace\\Library-Management-Project\\images\\Close-2-icon.png"));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
@@ -166,7 +198,7 @@ public class login extends JFrame {
 		contentPane.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\arwam\\OneDrive\\Documents\\GitHub\\Library-Management-Project\\images\\adminlogin.jpg"));
+		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\Sarim\\eclipse-workspace\\Library-Management-Project\\images\\admin.jpg"));
 		lblNewLabel_2.setForeground(new Color(204, 0, 0));
 		lblNewLabel_2.setBackground(new Color(255, 102, 153));
 		lblNewLabel_2.setBounds(0, 0, 693, 410);
