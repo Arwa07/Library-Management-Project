@@ -68,6 +68,7 @@ public class returnbook {
 	}
 	Connection con;
 	PreparedStatement pst;
+	private JTextField txtissueid;
 	public void connect() {
 		 try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -131,31 +132,69 @@ public class returnbook {
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setBounds(33, 21, 231, 40);
 		frame.getContentPane().add(lblNewLabel);
+		JLabel lblNewLabel_4 = new JLabel("  Issue ID");
+		lblNewLabel_4.setFont(new Font("Bookman Old Style", Font.BOLD, 18));
+		lblNewLabel_4.setBounds(13, 84, 120, 28);
+		frame.getContentPane().add(lblNewLabel_4);
+		
+		txtissueid = new JTextField();
+		txtissueid.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()== KeyEvent.VK_ENTER)
+				{
+					String issueid=txtissueid.getText();
+					try {
+						pst=con.prepareStatement("select * from issuebook where Id = ?");
+						pst.setString(1, issueid);
+						ResultSet rs=pst.executeQuery();
+						if(rs.next()== false) {
+							JOptionPane.showMessageDialog(null, " Issue Id not found");
+						}
+						else {
+							txtsid.requestFocus();
+
+							
+						}
+						
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				
+				
+			}
+			}
+		});
+		txtissueid.setBounds(142, 90, 148, 20);
+		frame.getContentPane().add(txtissueid);
+		txtissueid.setColumns(10);
+		
 		
 		JLabel lblNewLabel_1 = new JLabel("StudentID");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setFont(new Font("Bookman Old Style", Font.BOLD, 19));
-		lblNewLabel_1.setBounds(10, 94, 112, 28);
+		lblNewLabel_1.setBounds(13, 138, 112, 28);
 		frame.getContentPane().add(lblNewLabel_1);
 		JLabel txtsname = new JLabel("studentname");
 		txtsname.setBackground(new Color(255, 255, 255));
 		txtsname.setFont(new Font("Bookman Old Style", Font.BOLD, 15));
 		txtsname.setEnabled(false);
 		txtsname.setHorizontalAlignment(SwingConstants.CENTER);
-		txtsname.setBounds(160, 164, 120, 19);
+		txtsname.setBounds(170, 199, 120, 19);
 		frame.getContentPane().add(txtsname);
 		
 		JLabel txtbook = new JLabel("bookname");
 		txtbook.setEnabled(false);
 		txtbook.setHorizontalAlignment(SwingConstants.CENTER);
 		txtbook.setFont(new Font("Bookman Old Style", Font.BOLD, 15));
-		txtbook.setBounds(160, 222, 120, 19);
+		txtbook.setBounds(170, 244, 120, 20);
 		frame.getContentPane().add(txtbook);
 		JLabel txtrdate = new JLabel("Returndate");
 		txtrdate.setFont(new Font("Bookman Old Style", Font.BOLD, 15));
 		txtrdate.setEnabled(false);
 		txtrdate.setHorizontalAlignment(SwingConstants.CENTER);
-		txtrdate.setBounds(160, 279, 120, 19);
+		txtrdate.setBounds(170, 297, 120, 19);
 		frame.getContentPane().add(txtrdate);
 		
 		
@@ -166,10 +205,12 @@ public class returnbook {
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode()== KeyEvent.VK_ENTER)
 				{
+					String issueid=txtissueid.getText();
 				String id=txtsid.getText();
 				try {
-					pst=con.prepareStatement("select s.StudentName , b.BookName,i.Returndate,DATEDIFF(now(),i.Returndate) as elap from issuebook i JOIN student s ON i.StudentId = s.StudentId JOIN book b ON i.Book = b.Id and i.StudentId = ? ");
+					pst=con.prepareStatement("select s.StudentName , b.BookName,i.Returndate,DATEDIFF(now(),i.Returndate) as elap from issuebook i JOIN student s ON i.StudentId = s.StudentId JOIN book b ON i.Book = b.Id and i.StudentId = ? and i.Id = ? ");
 					pst.setString(1, id);
+					pst.setString(2, issueid);
 					ResultSet rs=pst.executeQuery();
 					if(rs.next()== false) {
 						JOptionPane.showMessageDialog(lblNewLabel_1, "StudentId not found");
@@ -204,49 +245,49 @@ public class returnbook {
 }
 		
 			}});
-						txtsid.setBounds(132, 102, 148, 19);
+						txtsid.setBounds(142, 145, 148, 19);
 		frame.getContentPane().add(txtsid);
 		txtsid.setColumns(10);
 		
 		JLabel lblNewLabel_2 = new JLabel("Student Name");
 		lblNewLabel_2.setFont(new Font("Bookman Old Style", Font.BOLD, 19));
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_2.setBounds(10, 164, 147, 19);
+		lblNewLabel_2.setBounds(13, 198, 147, 19);
 		frame.getContentPane().add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Book");
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_3.setFont(new Font("Bookman Old Style", Font.BOLD, 19));
-		lblNewLabel_3.setBounds(10, 222, 112, 19);
+		lblNewLabel_3.setBounds(0, 244, 112, 19);
 		frame.getContentPane().add(lblNewLabel_3);
 		
 		
 		JLabel lblNewLabel_6 = new JLabel("Return Date");
 		lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_6.setFont(new Font("Bookman Old Style", Font.BOLD, 19));
-		lblNewLabel_6.setBounds(10, 279, 123, 19);
+		lblNewLabel_6.setBounds(13, 296, 123, 19);
 		frame.getContentPane().add(lblNewLabel_6);
 		
 		
 		JLabel lblNewLabel_8 = new JLabel("Days Elapsed");
 		lblNewLabel_8.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_8.setFont(new Font("Bookman Old Style", Font.BOLD, 19));
-		lblNewLabel_8.setBounds(10, 335, 131, 19);
+		lblNewLabel_8.setBounds(13, 349, 131, 19);
 		frame.getContentPane().add(lblNewLabel_8);
 		
 		txtelp = new JTextField();
-		txtelp.setBounds(160, 335, 104, 19);
+		txtelp.setBounds(170, 351, 104, 19);
 		frame.getContentPane().add(txtelp);
 		txtelp.setColumns(10);
 		
 		JLabel lblNewLabel_9 = new JLabel("Fine");
 		lblNewLabel_9.setFont(new Font("Bookman Old Style", Font.BOLD, 19));
 		lblNewLabel_9.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_9.setBounds(10, 388, 112, 19);
+		lblNewLabel_9.setBounds(13, 393, 112, 19);
 		frame.getContentPane().add(lblNewLabel_9);
 		
 		txtfine = new JTextField();
-		txtfine.setBounds(160, 388, 104, 19);
+		txtfine.setBounds(170, 395, 104, 19);
 		frame.getContentPane().add(txtfine);
 		txtfine.setColumns(10);
 		
@@ -254,6 +295,8 @@ public class returnbook {
 		button_add.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String sid=txtsid.getText();
+				String issueid=txtissueid.getText();
+
 				String sname=txtsname.getText();
 				String bookname=txtbook.getText();
 				String rdate=txtrdate.getText();
@@ -271,8 +314,9 @@ public class returnbook {
 
 					
 					int k=pst.executeUpdate();
-					pst=con.prepareStatement("delete from issuebook where StudentId = ?");//to delete returned book record from issuebook table----
+					pst=con.prepareStatement("delete from issuebook where StudentId = ? and  Id = ?");//to delete returned book record from issuebook table----
 					pst.setString(1, sid);
+					pst.setString(2, issueid);
 					pst.executeUpdate();
 
 					if(k==1)
@@ -309,17 +353,21 @@ public class returnbook {
 		button_cancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					JOptionPane.showMessageDialog(frame, "gonna close connection");
+					 int result =JOptionPane.showConfirmDialog(frame, "Do you want to close connection?","connection close",JOptionPane.YES_NO_OPTION);
+					 if(result == JOptionPane.YES_OPTION) {
 		        	con.close();
+		        	librarianfunc object= new librarianfunc();
+					object.main(null);
+					
+					frame.setVisible(false);
+					 }
+					
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 
-				librarianfunc object= new librarianfunc();
-				object.main(null);
 				
-				frame.setVisible(false);
 			}
 		});
 		button_cancel.setFont(new Font("Constantia", Font.BOLD, 18));
@@ -404,6 +452,7 @@ public class returnbook {
 		lblNewLabel_10.setIcon(new ImageIcon("C:\\Users\\Sarim\\eclipse-workspace\\Library-Management-Project\\images\\bg3.PNG"));
 		lblNewLabel_10.setBounds(0, 0, 998, 609);
 		frame.getContentPane().add(lblNewLabel_10);
+		
 		
 	}
 }

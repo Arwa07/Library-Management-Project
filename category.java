@@ -295,7 +295,7 @@ public class category {
 		scrollPane.setViewportView(table);
 
 		
-		@SuppressWarnings("rawtypes")
+	
 		
 		
 				
@@ -306,7 +306,8 @@ public class category {
 				//to delete selected row record----
 				if(table.getSelectedRowCount()==1) {
 				try {
-					
+					int result =JOptionPane.showConfirmDialog(frame, "Do you want to delete?","connection close",JOptionPane.YES_NO_OPTION);
+					 if(result == JOptionPane.YES_OPTION) {
 					
 					int row=table.getSelectedRow();
 					String value=table.getModel().getValueAt(row,0).toString();
@@ -317,6 +318,15 @@ public class category {
 					 tbmodel.setRowCount(0);
 					 load();
 					 JOptionPane.showMessageDialog(btnNewButton_1, "Record deleted");
+					 btnNewButton.setEnabled(true);
+					 
+					 }
+					 else {
+						 btnNewButton.setEnabled(true);
+						 textField.setText("");
+							comboBox.setSelectedIndex(-1);
+							textField.requestFocus();
+					 }
 					 		
 					 
 				 
@@ -402,17 +412,19 @@ public class category {
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					JOptionPane.showMessageDialog(frame, "gonna close connection");
+					int result =JOptionPane.showConfirmDialog(frame, "Do you want to close connection?","connection close",JOptionPane.YES_NO_OPTION);
+					 if(result == JOptionPane.YES_OPTION) {
 		        	con.close();
+		        	addbooks object= new addbooks();
+					object.main(null);
+					
+					frame.setVisible(false);
+               }
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				addbooks object= new addbooks();
-				object.main(null);
 				
-				frame.setVisible(false);
-
 			}
 		});
 		btnNewButton_3.setFont(new Font("Constantia", Font.BOLD, 18));
