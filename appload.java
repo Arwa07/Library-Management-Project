@@ -21,11 +21,11 @@ public class appload extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		appload p= new appload();
+		appload appld= new appload();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-										p.setVisible(true);
+					appld.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -37,22 +37,23 @@ public class appload extends JFrame {
 			try {
 				for(int i= 0; i<=100;i++)
 				{
-				Thread.sleep(100);
-				p.pbar.setValue(i);
-				p.txtpin.setText(String.valueOf(i)+"%");
-				if(i==100)
-				{
-					p.setVisible(false);
-					p.dispose();
+					Thread.sleep(100); //main thread will sleep for 100 ms
+					appld.pbar.setValue(i);
+					appld.txtpin.setText(i+"%");   //changed from appld.txtpin.setText(String.valueOf(i)+"%");
+					if(i==100)
+					{
+						appld.setVisible(false);
+						appld.dispose();
+					}
 				}
-				}
-			} catch (InterruptedException e) {
+			} 
+			catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			hp.main(null);
-			p.dispose();
-		}
+			appld.dispose();
+		}////end of main function
 		
 		
 	
@@ -93,8 +94,8 @@ public class appload extends JFrame {
 		panel.add(txtpin);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Sarim\\eclipse-workspace\\Library-Management-Project\\images\\librarylogo.jpg"));
-		lblNewLabel_1.setBounds(242, 11, 221, 224);
+		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\fabdi\\eclipse-workspace\\Library-Management-Project\\images\\LMSresizedlogo.gif"));
+		lblNewLabel_1.setBounds(243, 10, 224, 224);
 		panel.add(lblNewLabel_1);
 	}
 }

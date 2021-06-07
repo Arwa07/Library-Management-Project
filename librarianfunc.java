@@ -65,8 +65,8 @@ public class librarianfunc {
 
 			}
 		});
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Sarim\\eclipse-workspace\\Library-Management-Project\\images\\addbooks.png"));
-		lblNewLabel.setBounds(283, 60, 121, 115);
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\fabdi\\eclipse-workspace\\Library-Management-Project\\images\\addbooks.png"));
+		lblNewLabel.setBounds(283, 84, 121, 115);
 		frame.getContentPane().add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("\r\n");
@@ -80,8 +80,8 @@ public class librarianfunc {
 
 			}
 		});
-		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Sarim\\eclipse-workspace\\Library-Management-Project\\images\\student.jpg"));
-		lblNewLabel_1.setBounds(195, 314, 121, 115);
+		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\fabdi\\eclipse-workspace\\Library-Management-Project\\images\\student.jpg"));
+		lblNewLabel_1.setBounds(58, 302, 121, 115);
 		frame.getContentPane().add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("New label");
@@ -96,8 +96,8 @@ public class librarianfunc {
 
 			}
 		});
-		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\Sarim\\eclipse-workspace\\Library-Management-Project\\images\\issuebooks.png"));
-		lblNewLabel_2.setBounds(20, 133, 121, 115);
+		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\fabdi\\eclipse-workspace\\Library-Management-Project\\images\\issuebooks.png"));
+		lblNewLabel_2.setBounds(58, 84, 121, 115);
 		frame.getContentPane().add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("");
@@ -111,8 +111,8 @@ public class librarianfunc {
 
 			}
 		});
-		lblNewLabel_3.setIcon(new ImageIcon("C:\\Users\\Sarim\\eclipse-workspace\\Library-Management-Project\\images\\logout.png"));
-		lblNewLabel_3.setBounds(405, 314, 121, 115);
+		lblNewLabel_3.setIcon(new ImageIcon("C:\\Users\\fabdi\\eclipse-workspace\\Library-Management-Project\\images\\logout.png"));
+		lblNewLabel_3.setBounds(283, 302, 121, 115);
 		frame.getContentPane().add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("New label");
@@ -126,44 +126,61 @@ public class librarianfunc {
 
 			}
 		});
-		lblNewLabel_4.setIcon(new ImageIcon("C:\\Users\\Sarim\\eclipse-workspace\\Library-Management-Project\\images\\returnbooks.png"));
-		lblNewLabel_4.setBounds(535, 133, 121, 115);
+		lblNewLabel_4.setIcon(new ImageIcon("C:\\Users\\fabdi\\eclipse-workspace\\Library-Management-Project\\images\\returnbooks.png"));
+		lblNewLabel_4.setBounds(510, 84, 121, 115);
 		frame.getContentPane().add(lblNewLabel_4);
 		
 		JLabel lblNewLabel_5 = new JLabel("Add Books");
 		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_5.setFont(new Font("Modern No. 20", Font.BOLD, 20));
-		lblNewLabel_5.setBounds(283, 195, 121, 26);
+		lblNewLabel_5.setBounds(283, 209, 121, 26);
 		frame.getContentPane().add(lblNewLabel_5);
 		
 		JLabel lblNewLabel_6 = new JLabel("Issue Books");
 		lblNewLabel_6.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_6.setFont(new Font("Modern No. 20", Font.BOLD, 20));
-		lblNewLabel_6.setBounds(20, 270, 121, 26);
+		lblNewLabel_6.setBounds(58, 209, 121, 26);
 		frame.getContentPane().add(lblNewLabel_6);
 		
 		JLabel lblNewLabel_7 = new JLabel("Return Books");
 		lblNewLabel_7.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_7.setFont(new Font("Modern No. 20", Font.BOLD, 20));
-		lblNewLabel_7.setBounds(536, 267, 131, 32);
+		lblNewLabel_7.setBounds(500, 206, 131, 32);
 		frame.getContentPane().add(lblNewLabel_7);
 		
 		JLabel lblNewLabel_8 = new JLabel("Students");
 		lblNewLabel_8.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_8.setFont(new Font("Modern No. 20", Font.BOLD, 20));
-		lblNewLabel_8.setBounds(195, 442, 121, 26);
+		lblNewLabel_8.setBounds(58, 427, 121, 26);
 		frame.getContentPane().add(lblNewLabel_8);
 		
 		JLabel lblNewLabel_9 = new JLabel("Logout");
 		lblNewLabel_9.setFont(new Font("Modern No. 20", Font.BOLD, 20));
 		lblNewLabel_9.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_9.setBounds(405, 439, 121, 33);
+		lblNewLabel_9.setBounds(283, 424, 121, 33);
 		frame.getContentPane().add(lblNewLabel_9);
+		
+		JLabel lblNewLabel_13 = new JLabel("Email");
+		lblNewLabel_13.setFont(new Font("Modern No. 20", Font.BOLD, 20));
+		lblNewLabel_13.setBounds(525, 424, 121, 33);
+		frame.getContentPane().add(lblNewLabel_13);
+		
+		JLabel lblNewLabel_11 = new JLabel("");
+		lblNewLabel_11.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				email.main(null);
+				frame.setVisible(false);
+			}
+		});
+		lblNewLabel_11.setIcon(new ImageIcon("C:\\Users\\fabdi\\eclipse-workspace\\Library-Management-Project\\images\\mail.png"));
+		lblNewLabel_11.setBounds(510, 302, 121, 115);
+		frame.getContentPane().add(lblNewLabel_11);
 		
 		JLabel lblNewLabel_12 = new JLabel("");
 		lblNewLabel_12.setBackground(new Color(255, 255, 255));
 		lblNewLabel_12.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_12.setIcon(new ImageIcon("C:\\ARWA\\TYBCA\\SEM-VI\\Project\\librarian2.PNG"));
+		lblNewLabel_12.setIcon(new ImageIcon("C:\\Users\\fabdi\\eclipse-workspace\\Library-Management-Project\\images\\librarian2.PNG"));
 		lblNewLabel_12.setBounds(0, 0, 696, 503);
 		frame.getContentPane().add(lblNewLabel_12);
 	}
