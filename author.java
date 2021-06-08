@@ -2,6 +2,9 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
@@ -11,7 +14,11 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -27,6 +34,7 @@ import javax.swing.table.JTableHeader;
 
 import net.proteanit.sql.DbUtils;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -67,6 +75,7 @@ public class author {
 	
 	Connection con;
 	PreparedStatement pst;
+	private JTextField txtselection;
 	public void connect() {
 		 try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -127,8 +136,190 @@ public class author {
 		lblNewLabel.setFont(new Font("Elephant", Font.BOLD, 21));
 		lblNewLabel.setForeground(new Color(128, 0, 0));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(39, 23, 141, 34);
+		lblNewLabel.setBounds(76, 37, 141, 34);
 		frame.getContentPane().add(lblNewLabel);
+		JMenuBar menuBar = new JMenuBar();
+		menuBar.setFont(new Font("Segoe UI Symbol", Font.BOLD, 14));
+		menuBar.setForeground(new Color(0, 0, 0));
+		menuBar.setBackground(new Color(255, 255, 204));
+		menuBar.setBounds(0, 0, 960, 27);
+		frame.getContentPane().add(menuBar);
+		
+		JMenu mnNewMenu = new JMenu("Home");
+		mnNewMenu.setIcon(new ImageIcon("C:\\Users\\Sarim\\eclipse-workspace\\Library-Management-Project\\images\\home-icon.png"));
+		mnNewMenu.setBackground(new Color(255, 255, 0));
+		mnNewMenu.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				librarianfunc lb=new librarianfunc() ;
+				lb.main(null);
+				frame.setVisible(false);
+			}
+		});
+		menuBar.add(mnNewMenu);
+		
+		JMenu mnNewMenu_4 = new JMenu("AddBooks");
+		mnNewMenu_4.setIcon(new ImageIcon("C:\\Users\\Sarim\\eclipse-workspace\\Library-Management-Project\\images\\addbooks-icon.png"));
+		mnNewMenu_4.setBackground(new Color(255, 255, 0));
+		menuBar.add(mnNewMenu_4);
+		
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Category");
+		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				category ct=new category() ;
+				ct.main(null);
+				frame.setVisible(false);
+				
+			}
+		});
+		
+		mntmNewMenuItem_1.setBackground(new Color(255, 255, 153));
+		mnNewMenu_4.add(mntmNewMenuItem_1);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Author");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				author obj=new author() ;
+				obj.main(null);
+				frame.setVisible(false);
+
+			}
+		});
+				mntmNewMenuItem.setBackground(new Color(255, 255, 153));
+		mntmNewMenuItem.setForeground(new Color(0, 0, 0));
+		mnNewMenu_4.add(mntmNewMenuItem);
+		
+		JMenuItem mntmNewMenuItem_2 = new JMenuItem("publisher");
+		mntmNewMenuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				publisher obj=new publisher() ;
+				obj.main(null);
+				frame.setVisible(false);
+
+				
+			}
+		});
+				mntmNewMenuItem_2.setBackground(new Color(255, 255, 153));
+		mnNewMenu_4.add(mntmNewMenuItem_2);
+		
+		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Books");
+		mntmNewMenuItem_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				books obj=new books() ;
+				obj.main(null);
+				frame.setVisible(false);
+			}
+		});
+		
+		mntmNewMenuItem_3.setBackground(new Color(255, 255, 153));
+		mnNewMenu_4.add(mntmNewMenuItem_3);
+		
+		JMenu mnNewMenu_5 = new JMenu("Student");
+		mnNewMenu_5.setIcon(new ImageIcon("C:\\Users\\Sarim\\eclipse-workspace\\Library-Management-Project\\images\\Student-id-icon.png"));
+		mnNewMenu_5.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				student obj=new student() ;
+				obj.main(null);
+				frame.setVisible(false);
+			}
+		});
+		mnNewMenu_5.setBackground(new Color(255, 255, 0));
+		menuBar.add(mnNewMenu_5);
+		
+		JMenu mnNewMenu_6 = new JMenu("IssueBook");
+		mnNewMenu_6.setIcon(new ImageIcon("C:\\Users\\Sarim\\eclipse-workspace\\Library-Management-Project\\images\\issuebook-icon.png"));
+		mnNewMenu_6.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				issuebook obj=new issuebook() ;
+				obj.main(null);
+				frame.setVisible(false);
+			}
+		});
+		mnNewMenu_6.setBackground(new Color(255, 255, 0));
+		menuBar.add(mnNewMenu_6);
+		
+		JMenu mnNewMenu_7 = new JMenu("ReturnBook");
+		mnNewMenu_7.setIcon(new ImageIcon("C:\\Users\\Sarim\\eclipse-workspace\\Library-Management-Project\\images\\returnbook-icon.png"));
+		mnNewMenu_7.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				returnbook obj=new returnbook() ;
+				obj.main(null);
+				frame.setVisible(false);
+			}
+		});
+		mnNewMenu_7.setBackground(new Color(255, 255, 0));
+		menuBar.add(mnNewMenu_7);
+		
+		JMenu mnNewMenu_1 = new JMenu("Email");
+		mnNewMenu_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				email obj=new email() ;
+				obj.main(null);
+				frame.setVisible(false);
+			}
+		});
+		mnNewMenu_1.setIcon(new ImageIcon("C:\\Users\\Sarim\\eclipse-workspace\\Library-Management-Project\\images\\email-icon.png"));
+		menuBar.add(mnNewMenu_1);
+		JLabel searchlbl = new JLabel("Search By");
+		searchlbl.setIcon(new ImageIcon("C:\\Users\\Sarim\\eclipse-workspace\\Library-Management-Project\\images\\search-icon.png"));
+		searchlbl.setForeground(new Color(153, 0, 102));
+		searchlbl.setFont(new Font("Bookman Old Style", Font.BOLD, 18));
+		searchlbl.setBounds(351, 72, 137, 32);
+		frame.getContentPane().add(searchlbl);
+		JComboBox cselection = new JComboBox();
+		cselection.setForeground(new Color(153, 0, 0));
+		cselection.setModel(new DefaultComboBoxModel(new String[] {"Id", "Name"}));
+		cselection.setBounds(498, 72, 115, 36);
+		frame.getContentPane().add(cselection);
+		
+		
+		txtselection = new JTextField();
+		txtselection.setForeground(new Color(0, 102, 153));
+		txtselection.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				
+				
+				try {
+					String selection=(String)cselection.getSelectedItem();
+					String query="select * from author where "+selection+" = ? ";
+					pst=con.prepareStatement(query);
+					pst.setString(1, txtselection.getText());
+					ResultSet rs=pst.executeQuery();
+					
+					table.setModel(DbUtils.resultSetToTableModel(rs));
+					
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		});
+		
+		txtselection.setBounds(649, 71, 147, 39);
+		frame.getContentPane().add(txtselection);
+		txtselection.setColumns(10);
+		JButton txttable = new JButton("Refresh");
+		txttable.setIcon(new ImageIcon("C:\\Users\\Sarim\\eclipse-workspace\\Library-Management-Project\\images\\Refresh-icon.png"));
+		txttable.setFont(new Font("Bookman Old Style", Font.BOLD, 13));
+		txttable.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				author_load() ;
+				
+			}
+		});
+		txttable.setBounds(556, 514, 126, 36);
+		frame.getContentPane().add(txttable);
+		
+
+		
+
+		
 		
 		JLabel lblNewLabel_1 = new JLabel("Name");
 		lblNewLabel_1.setFont(new Font("Bookman Old Style", Font.BOLD, 18));
@@ -166,6 +357,7 @@ public class author {
 		frame.getContentPane().add(lblNewLabel_3);
 		
 		JButton button_add = new JButton("Add");
+		button_add.setIcon(new ImageIcon("C:\\Users\\Sarim\\eclipse-workspace\\Library-Management-Project\\images\\Add-icon.png"));
 		button_add.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//to insert record---
@@ -218,10 +410,11 @@ public class author {
 			}
 		}});
 		button_add.setFont(new Font("Constantia", Font.BOLD, 18));
-		button_add.setBounds(23, 384, 108, 34);
+		button_add.setBounds(23, 359, 126, 47);
 		frame.getContentPane().add(button_add);
 		
 		JButton button_update = new JButton("Update");
+		button_update.setIcon(new ImageIcon("C:\\Users\\Sarim\\eclipse-workspace\\Library-Management-Project\\images\\updateicon.png"));
 		button_update.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(table.getSelectedRowCount()==1) //to check whether row is selected or not--------
@@ -286,37 +479,44 @@ public class author {
 
 		}});
 		button_update.setFont(new Font("Constantia", Font.BOLD, 18));
-		button_update.setBounds(182, 384, 108, 34);
+		button_update.setBounds(169, 359, 129, 47);
 		frame.getContentPane().add(button_update);
 		
 		JButton button_cancel = new JButton("Cancel");
+		button_cancel.setIcon(new ImageIcon("C:\\Users\\Sarim\\eclipse-workspace\\Library-Management-Project\\images\\Close-2-icon.png"));
 		button_cancel.setFont(new Font("Constantia", Font.BOLD, 18));
 		button_cancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					JOptionPane.showMessageDialog(frame, "gonna close connection");
+					int result =JOptionPane.showConfirmDialog(frame, "Do you want to close connection?","connection close",JOptionPane.YES_NO_OPTION);
+					 if(result == JOptionPane.YES_OPTION) {
 		        	con.close();
+		        	addbooks object= new addbooks();
+					object.main(null);
+					
+					frame.setVisible(false);
+					 }
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 
-				addbooks object= new addbooks();
-				object.main(null);
 				
-				frame.setVisible(false);
-
 			}
 		});
-		button_cancel.setBounds(182, 450, 108, 34);
+		button_cancel.setBounds(169, 417, 129, 47);
 		frame.getContentPane().add(button_cancel);
 		
 		JButton button_delete = new JButton("Delete");
+		button_delete.setIcon(new ImageIcon("C:\\Users\\Sarim\\eclipse-workspace\\Library-Management-Project\\images\\Button-Delete-icon.png"));
 		button_delete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//to delete selected row record----
 				if(table.getSelectedRowCount()==1) {
 				try {
+					int result =JOptionPane.showConfirmDialog(frame, "Do you really want to delete the Record?","Record Delete",JOptionPane.YES_NO_OPTION);
+					 if(result == JOptionPane.YES_OPTION) {
+
 					Class.forName("com.mysql.cj.jdbc.Driver");
 					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/slibrary","root","root");
 					int row=table.getSelectedRow();
@@ -335,6 +535,19 @@ public class author {
 						txtname.requestFocus();
 
 					 button_add.setEnabled(true);
+					 }
+					 else {
+						 txtname.setText("");
+							txtaddress.setText("");
+							txtcontact.setText("");
+							
+							txtname.requestFocus();
+							 button_add.setEnabled(true);
+
+
+						
+					 }
+
 
 					 
 						
@@ -358,11 +571,11 @@ public class author {
 			
 		});
 		button_delete.setFont(new Font("Constantia", Font.BOLD, 18));
-		button_delete.setBounds(23, 451, 108, 34);
+		button_delete.setBounds(20, 417, 129, 47);
 		frame.getContentPane().add(button_delete);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(354, 32, 566, 531);
+		scrollPane.setBounds(321, 118, 566, 394);
 		frame.getContentPane().add(scrollPane);
 		
 		table = new JTable();
@@ -443,7 +656,7 @@ public class author {
 		
 		JLabel lblNewLabel_4 = new JLabel("");
 		lblNewLabel_4.setIcon(new ImageIcon("C:\\Users\\Sarim\\eclipse-workspace\\Library-Management-Project\\images\\bg7.PNG"));
-		lblNewLabel_4.setBounds(0, 0, 952, 592);
+		lblNewLabel_4.setBounds(0, 0, 962, 592);
 		frame.getContentPane().add(lblNewLabel_4);
 		
 				
