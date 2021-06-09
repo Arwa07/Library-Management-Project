@@ -21,11 +21,11 @@ public class appload extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		appload appld= new appload();
+		appload p= new appload();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					appld.setVisible(true);
+										p.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -37,23 +37,22 @@ public class appload extends JFrame {
 			try {
 				for(int i= 0; i<=100;i++)
 				{
-					Thread.sleep(100); //main thread will sleep for 100 ms
-					appld.pbar.setValue(i);
-					appld.txtpin.setText(i+"%");   //changed from appld.txtpin.setText(String.valueOf(i)+"%");
-					if(i==100)
-					{
-						appld.setVisible(false);
-						appld.dispose();
-					}
+				Thread.sleep(100);
+				p.pbar.setValue(i);
+				p.txtpin.setText((i)+"%");
+				if(i==100)
+				{
+					p.setVisible(false);
+					p.dispose();
 				}
-			} 
-			catch (InterruptedException e) {
+				}
+			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			hp.main(null);
-			appld.dispose();
-		}////end of main function
+			p.dispose();
+		}
 		
 		
 	
@@ -65,23 +64,24 @@ public class appload extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 743, 481);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(255, 255, 153));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(153, 204, 204));
+		panel.setBackground(new Color(51, 204, 204));
 		panel.setBorder(new EmptyBorder(0, 0, 0, 0));
-		panel.setBounds(0, 0, 737, 442);
+		panel.setBounds(10, 11, 707, 420);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Loading................................................");
-		lblNewLabel.setForeground(new Color(102, 51, 204));
+		lblNewLabel.setForeground(new Color(0, 0, 204));
 		lblNewLabel.setFont(new Font("Bookman Old Style", Font.BOLD, 24));
-		lblNewLabel.setBounds(262, 235, 215, 45);
+		lblNewLabel.setBounds(252, 246, 215, 34);
 		panel.add(lblNewLabel);
-		pbar.setForeground(new Color(204, 102, 51));
+		pbar.setForeground(new Color(255, 204, 0));
 		
 		
 		pbar.setBounds(74, 291, 587, 29);
@@ -89,13 +89,13 @@ public class appload extends JFrame {
 		
 		
 		txtpin.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtpin.setForeground(Color.RED);
-		txtpin.setBounds(292, 342, 81, 29);
+		txtpin.setForeground(new Color(153, 0, 0));
+		txtpin.setBounds(322, 329, 81, 29);
 		panel.add(txtpin);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\fabdi\\eclipse-workspace\\Library-Management-Project\\images\\LMSresizedlogo.gif"));
-		lblNewLabel_1.setBounds(243, 10, 224, 224);
+		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Sarim\\eclipse-workspace\\Library-Management-Project\\images\\lmslogo.gif"));
+		lblNewLabel_1.setBounds(242, 11, 221, 224);
 		panel.add(lblNewLabel_1);
 	}
 }

@@ -270,6 +270,28 @@ private JTextField textField;
 					JOptionPane.showMessageDialog(btnNewButton, "SOME FIELDS ARE EMPTY","error",1);
 					
 				}
+				else if(!Pattern.matches("[a-zA-Z][a-zA-Z]*", textField.getText()))
+				{
+			       JOptionPane.showMessageDialog(null, "invalid firstname");
+			    
+			       textField.setText("");
+					
+				}
+				else if(!Pattern.matches("[a-zA-Z][a-zA-Z]*", textField_1.getText()))
+				{
+			       JOptionPane.showMessageDialog(null, "invalid lastname");
+			    
+			       textField_1.setText("");
+					
+				}
+
+				else if(!Pattern.matches("^(.+)@(.+)$", textField_2.getText()))
+				{
+			       JOptionPane.showMessageDialog(null, "invalid email address");
+			    
+			       textField_2.setText("");
+					
+				}
 				else if(!pswd.equals(password)) {
 					JOptionPane.showMessageDialog(btnNewButton, "password does not macthed","error",1);
 					passwordField_3.setText("");
@@ -333,7 +355,7 @@ private JTextField textField;
 		passwordField_3.setBounds(178, 371, 120, 20);
 		frame.getContentPane().add(passwordField_3);
 		btnNewButton.setFont(new Font("Constantia", Font.BOLD, 18));
-		btnNewButton.setBounds(10, 426, 115, 49);
+		btnNewButton.setBounds(10, 426, 131, 49);
 		frame.getContentPane().add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Delete");
@@ -393,7 +415,7 @@ private JTextField textField;
 			}
 		});
 		btnNewButton_1.setFont(new Font("Constantia", Font.BOLD, 18));
-		btnNewButton_1.setBounds(10, 486, 115, 49);
+		btnNewButton_1.setBounds(10, 486, 131, 49);
 		frame.getContentPane().add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Update");
@@ -418,6 +440,29 @@ private JTextField textField;
 					JOptionPane.showMessageDialog(btnNewButton, "SOME FIELDS ARE EMPTY","error",1);
 					
 				}
+				else if(!Pattern.matches("[a-zA-Z][a-zA-Z]*", textField.getText()))
+				{
+			       JOptionPane.showMessageDialog(null, "invalid firstname");
+			    
+			       textField.setText("");
+					
+				}
+				else if(!Pattern.matches("[a-zA-Z][a-zA-Z]*", textField_1.getText()))
+				{
+			       JOptionPane.showMessageDialog(null, "invalid lastname");
+			    
+			       textField_1.setText("");
+					
+				}
+
+				else if(!Pattern.matches("^(.+)@(.+)$", textField_2.getText()))
+				{
+			       JOptionPane.showMessageDialog(null, "invalid email address");
+			    
+			       textField_2.setText("");
+					
+				}
+
 				else if(!pswd.equals(password)) {
 					JOptionPane.showMessageDialog(btnNewButton, "password does not macthed","error",1);
 					;
@@ -478,7 +523,7 @@ private JTextField textField;
 			}
 		});
 		btnNewButton_2.setFont(new Font("Constantia", Font.BOLD, 18));
-		btnNewButton_2.setBounds(151, 426, 115, 49);
+		btnNewButton_2.setBounds(151, 426, 128, 49);
 		frame.getContentPane().add(btnNewButton_2);
 		
 		JButton btnNewButton_3 = new JButton("Cancel");
@@ -504,7 +549,7 @@ private JTextField textField;
 			}
 		});
 		btnNewButton_3.setFont(new Font("Constantia", Font.BOLD, 18));
-		btnNewButton_3.setBounds(151, 488, 115, 47);
+		btnNewButton_3.setBounds(151, 488, 128, 47);
 		frame.getContentPane().add(btnNewButton_3);
 		
 		JScrollPane scrollPane = new JScrollPane();

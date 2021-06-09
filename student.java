@@ -135,12 +135,12 @@ public class student {
 		lblNewLabel.setBounds(38, 51, 265, 36);
 		frame.getContentPane().add(lblNewLabel);
 		
-		JLabel lblNewLabel_6 = new JLabel("Search By");
-		lblNewLabel_6.setIcon(new ImageIcon("C:\\Users\\Sarim\\eclipse-workspace\\Library-Management-Project\\images\\search-icon.png"));
-		lblNewLabel_6.setForeground(new Color(153, 0, 102));
-		lblNewLabel_6.setFont(new Font("Bookman Old Style", Font.BOLD, 18));
-		lblNewLabel_6.setBounds(460, 54, 137, 32);
-		frame.getContentPane().add(lblNewLabel_6);
+		JLabel searchlbl = new JLabel("Search By");
+		searchlbl.setIcon(new ImageIcon("C:\\Users\\Sarim\\eclipse-workspace\\Library-Management-Project\\images\\search-icon.png"));
+		searchlbl.setForeground(new Color(153, 0, 102));
+		searchlbl.setFont(new Font("Bookman Old Style", Font.BOLD, 18));
+		searchlbl.setBounds(460, 54, 137, 32);
+		frame.getContentPane().add(searchlbl);
 		// to add menubar
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setFont(new Font("Segoe UI Symbol", Font.BOLD, 14));
@@ -258,6 +258,14 @@ public class student {
 		menuBar.add(mnNewMenu_7);
 		
 		JMenu mnNewMenu_1 = new JMenu("Email");
+		mnNewMenu_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				email obj=new email() ;
+				obj.main(null);
+				frame.setVisible(false);
+			}
+		});
 		mnNewMenu_1.setIcon(new ImageIcon("C:\\Users\\Sarim\\eclipse-workspace\\Library-Management-Project\\images\\email-icon.png"));
 		menuBar.add(mnNewMenu_1);
 		
@@ -364,6 +372,21 @@ public class student {
 					
 					
 				}
+								else if(!Pattern.matches("[a-zA-Z][a-zA-Z]*", txtname.getText()))
+								{
+							       JOptionPane.showMessageDialog(null, "invalid name");
+							    
+								  txtname.setText("");
+									
+								}
+								else if(!Pattern.matches("^(.+)@(.+)$", txtemail.getText()))
+								{
+							       JOptionPane.showMessageDialog(null, "invalid email address");
+							    
+								  txtemail.setText("");
+									
+								}
+
 								else if(!Pattern.matches("^[0-9]+$", txtcontact.getText()))
 								{
 							       JOptionPane.showMessageDialog(null, "CONTACT SHOULD BE A NUMBER");
@@ -440,6 +463,21 @@ public class student {
 				  txtcontact.setText("");
 					
 				}
+				else if(!Pattern.matches("[a-zA-Z][a-zA-Z]*", txtname.getText()))
+				{
+			       JOptionPane.showMessageDialog(null, "invalid name");
+			    
+				  txtname.setText("");
+					
+				}
+				else if(!Pattern.matches("^(.+)@(.+)$", txtemail.getText()))
+				{
+			       JOptionPane.showMessageDialog(null, "invalid email address");
+			    
+				  txtemail.setText("");
+					
+				}
+
 				else {
 				try {
 					pst=con.prepareStatement("update student set StudentName =? , Address = ? , phoneno = ? , Email = ?  where StudentId = ?");
